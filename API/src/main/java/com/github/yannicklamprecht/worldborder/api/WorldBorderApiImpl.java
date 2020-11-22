@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -43,11 +44,21 @@ public class WorldBorderApiImpl implements WorldBorderApi {
 
     @Override
     public void setBorder(Player player, double size, Location location) {
+        setBorder(player, size, new Position(location));
+    }
+
+    @Override
+    public void setBorder(Player player, double size, Position location) {
         IWorldBorder border = getWorldBorder(player);
         border.setSize(size);
-        border.setCenter(new Position(location));
+        border.setCenter(location);
         border.send(player, WorldBorderAction.SET_SIZE);
         border.send(player, WorldBorderAction.SET_CENTER);
+    }
+
+    @Override
+    public void setBorder(Player player, double size, Vector location) {
+        setBorder(player, size, new Position(location));
     }
 
     @Override

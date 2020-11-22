@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -55,11 +56,21 @@ public class PersistenceWrapper implements PersistentWorldBorderApi {
 
     @Override
     public void setBorder(Player player, double size, Location location) {
+        setBorder(player, size, new Position(location));
+    }
+
+    @Override
+    public void setBorder(Player player, double size, Position location) {
         worldBorderApi.setBorder(player, size, location);
         modifyAndUpdateWorldData(player, worldBorderData -> {
             worldBorderData.setSize(size);
-            worldBorderData.setCenter(location.getBlockX(), location.getBlockZ());
+            worldBorderData.setCenter(location.getX(), location.getZ());
         });
+    }
+
+    @Override
+    public void setBorder(Player player, double size, Vector location) {
+        setBorder(player, size, new Position(location));
     }
 
     @Override
