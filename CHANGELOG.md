@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - add support for 1.16.4
 
+## [1.165.0] 
+
+- Change center coordinates more accurately
+- Release 1.164.0
+- add support for 1.16.4'
+
 ## [1.163.1] Astronaut
 
 - changelog v2
